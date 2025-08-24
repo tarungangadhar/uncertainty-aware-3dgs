@@ -81,16 +81,7 @@ Uncertainty *uᵢ = std_v(sᵢ^(v))*; percentile-clip and colorize for visualiza
 
 ## Project structure
 
-uncertainty-aware-3dgs/
-├─ code/
-│ └─ uncertainityawaregs.py
-├─ docs/
-│ ├─ UncertainityAwareGS.pdf
-│ ├─ assets/
-│ │ ├─ normal.png
-│ │ ├─ uncertainty.png
-│ │ └─ demo.mp4
-└─ README.md
+<img width="227" height="193" alt="image" src="https://github.com/user-attachments/assets/2b763bbe-4e21-41b1-9575-a5c01021d3bc" />
 
 
 ---
