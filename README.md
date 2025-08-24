@@ -67,7 +67,7 @@ Key steps inside:
 |---|---|---|
 | Example | ![normal](docs/assets/normal.png) | ![uncertainty](docs/assets/uncertainty.png) |
 
-Uncertainty emphasizes splats at **scene peripheries, thin structures, and depth-unstable regions**; confident geometry stays low. (See PDF for summary statistics—min/mean/max; robust percentiles and visual comparisons.) :contentReference[oaicite:9]{index=9}
+Uncertainty emphasizes splats at **scene peripheries, thin structures, and depth-unstable regions**; confident geometry stays low. (See PDF for summary statistics—min/mean/max; robust percentiles and visual comparisons.) 
 
 ---
 
