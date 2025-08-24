@@ -89,7 +89,6 @@ uncertainty-aware-3dgs/
 │ ├─ assets/
 │ │ ├─ normal.png
 │ │ ├─ uncertainty.png
-│ │ ├─ rd_example.png
 │ │ └─ demo.mp4
 └─ README.md
 
