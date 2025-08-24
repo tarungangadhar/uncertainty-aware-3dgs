@@ -35,7 +35,7 @@ This project was developed in **Google Colab**.
    - one **uncertainty heatmap** render
    - optional **orbit GIFs** (normal + heatmap)
 
-See the Colab code for full pipeline (camera orbit, projection, visibility score, uncertainty, rendering). :contentReference[oaicite:6]{index=6}
+See the Colab code for full pipeline (camera orbit, projection, visibility score, uncertainty, rendering).
 
 ---
 
@@ -51,9 +51,9 @@ Key steps inside:
 - Build pinhole intrinsics, `look_at` poses for an azimuth orbit (12–24 views).
 - Per view: project, estimate pixel radius from scale & depth, compute visibility score.
 - Uncertainty = std over views; percentile-normalize to [0,1]; color with Viridis.
-- Render **normal** and **heatmap** images; optionally export orbit GIFs. :contentReference[oaicite:7]{index=7}
+- Render **normal** and **heatmap** images; optionally export orbit GIFs. 
 
-> Tip: Keep `n_views` modest (e.g., 12–24) to balance stability and runtime. Use `MAX_N` to subsample splats if memory is tight. :contentReference[oaicite:8]{index=8}
+> Tip: Keep `n_views` modest (e.g., 12–24) to balance stability and runtime. Use `MAX_N` to subsample splats if memory is tight. 
 
 ---
 
