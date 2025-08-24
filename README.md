@@ -65,7 +65,7 @@ Key steps inside:
 
 | View | Normal render | Uncertainty heatmap |
 |---|---|---|
-| Example | ![normal](../docs/assets/normal.png) | ![uncertainty](docs/assets/uncertainty.png) |
+| Example | ![normal](docs/assets/normal.png) | ![uncertainty](docs/assets/uncertainty.png) |
 
 Uncertainty emphasizes splats at **scene peripheries, thin structures, and depth-unstable regions**; confident geometry stays low. (See PDF for summary statistics—min/mean/max; robust percentiles and visual comparisons.) 
 
