@@ -8,7 +8,7 @@
 
 ## Idea (one paragraph)
 
-Render contributions for each Gaussian across an **orbit of cameras**, compute a **per-view visibility score** (opacity × screen-space footprint ÷ depth²), then take the **cross-view standard deviation** as an uncertainty signal. Stable, consistently visible splats have low variance; flickery / peripheral / depth-unstable splats have high variance. We visualize an **uncertainty heatmap** and can export normal vs. heatmap orbits as GIFs. (See implementation details in the notebook and PDF.) :contentReference[oaicite:3]{index=3} :contentReference[oaicite:4]{index=4}
+Render contributions for each Gaussian across an **orbit of cameras**, compute a **per-view visibility score** (opacity × screen-space footprint ÷ depth²), then take the **cross-view standard deviation** as an uncertainty signal. Stable, consistently visible splats have low variance; flickery / peripheral / depth-unstable splats have high variance. We visualize an **uncertainty heatmap** and can export normal vs. heatmap orbits as GIFs. (See implementation details in the notebook and PDF.)
 
 ---
 
@@ -17,7 +17,7 @@ Render contributions for each Gaussian across an **orbit of cameras**, compute a
 - **Per-splat uncertainty** from cross-view dispersion (std over orbit)  
 - **Colab-friendly**: loads `.ply`, subsamples to ~40k splats, 256×256 renders  
 - **Outputs**: normal RGB render, **uncertainty heatmap**, optional orbit GIFs  
-- **Zero retraining**; works with any pretrained 3DGS scene you have on disk :contentReference[oaicite:5]{index=5}
+- **Zero retraining**; works with any pretrained 3DGS scene you have on disk.
 
 ---
 
@@ -71,7 +71,7 @@ Uncertainty emphasizes splats at **scene peripheries, thin structures, and depth
 
 For each splat *i* and view *v*, define a visibility proxy  
 *sᵢ^(v) = αᵢ · (rᵢ² / zᵢ²)*, where α is opacity, *r* is screen-space radius, *z* is depth.  
-Uncertainty *uᵢ = std_v(sᵢ^(v))*; percentile-clip and colorize for visualization. :contentReference[oaicite:10]{index=10}
+Uncertainty *uᵢ = std_v(sᵢ^(v))*; percentile-clip and colorize for visualization. 
 
 ---
 
@@ -96,7 +96,7 @@ uncertainty-aware-3dgs/
 
 - Heuristic visibility proxy; not a calibrated probabilistic confidence.  
 - Orbit density trades runtime vs. stability; anisotropy not yet visualized.  
-- Next: Bayesian/variational uncertainty; semantics-aware maps; extend to **4DGS**. :contentReference[oaicite:11]{index=11}
+- Next: Bayesian/variational uncertainty; semantics-aware maps; extend to **4DGS**.
 
 ---
 
