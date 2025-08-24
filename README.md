@@ -2,7 +2,7 @@
 
 **Per-splat uncertainty from multi-view visibility dispersion** — a light, reproducible diagnostic on top of a pretrained 3DGS `.ply` scene. No retraining required; runs on free Colab/T4.
 
-> 📄 Write-up: [`docs/UncertainityAwareGS.pdf`](docs/UncertainityAwareGS.pdf)
+> 📄 Write up: [`docs/UncertainityAwareGS.pdf`](docs/UncertainityAwareGS.pdf)
 
 ---
 
