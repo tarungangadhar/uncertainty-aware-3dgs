@@ -10,7 +10,7 @@
 
 ---
 
-## Idea (one paragraph)
+## Idea 
 
 Render contributions for each Gaussian across an **orbit of cameras**, compute a **per-view visibility score** (opacity × screen-space footprint ÷ depth²), then take the **cross-view standard deviation** as an uncertainty signal. Stable, consistently visible splats have low variance; flickery / peripheral / depth-unstable splats have high variance. We visualize an **uncertainty heatmap** and can export normal vs. heatmap orbits as GIFs. (See implementation details in the notebook and PDF.)
 
