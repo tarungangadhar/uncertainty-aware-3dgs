@@ -4,6 +4,10 @@
 
 > 📄 Write up: [`docs/UncertainityAwareGS.pdf`](docs/UncertainityAwareGS.pdf)
 
+> Colab: https://colab.research.google.com/drive/1tMTyS_aqlMJTgZr2AW2ryCD6RYuLTHer?usp=sharing
+
+> Website: 
+
 ---
 
 ## Idea (one paragraph)
