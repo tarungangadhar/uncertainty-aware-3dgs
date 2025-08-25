@@ -6,7 +6,7 @@
 
 > Colab: https://colab.research.google.com/drive/1tMTyS_aqlMJTgZr2AW2ryCD6RYuLTHer?usp=sharing
 
-> Website: 
+> Website: https://tarungangadhar.github.io/uncertainty-aware-3dgs-website/
 
 ---
 
