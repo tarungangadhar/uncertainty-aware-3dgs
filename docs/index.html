@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Uncertainty-Aware 3D Gaussian Splatting — Tarun G. Vadaparthi</title>
+<meta name="description" content="Uncertainty visualization on pretrained 3DGS via cross-view visibility dispersion">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+<!-- MathJax for simple formulas -->
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root{ --bg:#fbfbfd; --ink:#161a22; --sub:#5d6a7e; --line:#e8ecf3; --pill:#eef2ff; --max:880px; }
+  html{scroll-behavior:smooth}
+  *{box-sizing:border-box}
+  body{ margin:0; background:var(--bg); color:var(--ink);
+        font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.7; }
+  .wrap{ max-width:var(--max); margin:0 auto; padding:36px 20px; }
+  h1{ font-family:"Source Serif 4",Georgia,serif; font-weight:600; letter-spacing:.2px; margin:.2rem 0; }
+  .by{ color:var(--sub); margin:.2rem 0 1rem; }
+  .row{ display:flex; gap:10px; flex-wrap:wrap; margin:.6rem 0 1.2rem; }
+  .pill{ display:inline-block; padding:8px 12px; border-radius:999px; background:var(--pill);
+         border:1px solid var(--line); text-decoration:none; color:var(--ink); font-weight:600; }
+  hr{ border:none; border-top:1px solid var(--line); margin:26px 0; }
+  figure{ margin:18px 0; }
+  figcaption{ color:var(--sub); font-size:.92rem; margin-top:8px; }
+  img, video{ max-width:100%; height:auto; border:1px solid var(--line); border-radius:12px; }
+
+  /* comparison slider (compact, centered) */
+  .compare{ position:relative; max-width:600px; margin:0 auto;
+            border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff; }
+  .compare img{ display:block; width:100%; height:auto; user-select:none; pointer-events:none; }
+  .compare .after{ position:absolute; inset:0; clip-path:inset(0 0 0 var(--split,50%)); }
+  .compare .line{ position:absolute; inset:0; --x:var(--split,50%);
+                  background:linear-gradient(90deg, transparent calc(var(--x) - 1px),
+                  rgba(0,0,0,.22) calc(var(--x) - 1px), rgba(0,0,0,.22) calc(var(--x) + 1px),
+                  transparent calc(var(--x) + 1px)); pointer-events:none; }
+  .compare .knob{ position:absolute; top:50%; left:var(--split,50%); transform:translate(-50%,-50%);
+                  width:42px; height:42px; border-radius:50%; background:rgba(0,0,0,0.7);
+                  border:1px solid rgba(255,255,255,0.45); display:flex; align-items:center; justify-content:center; pointer-events:none; }
+  .compare .chev{ display:flex; gap:6px }
+  .compare .chev span{ width:0; height:0; border-top:7px solid transparent; border-bottom:7px solid transparent; }
+  .compare .chev .l{ border-right:10px solid #fff }
+  .compare .chev .r{ border-left:10px solid #fff }
+  .compare input[type=range]{ position:absolute; inset:0; opacity:0; cursor:ew-resize; }
+
+  /* corner labels */
+  .compare .label{ position:absolute; bottom:10px; padding:4px 10px; font-size:.85rem;
+                   color:#fff; background:rgba(0,0,0,.65); border-radius:6px; font-weight:500; }
+  .compare .label.left{ left:10px }
+  .compare .label.right{ right:10px }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <!-- Title / Authors -->
+  <header>
+    <h1>Uncertainty-Aware 3D Gaussian Splatting</h1>
+    <div class="by">Tarun Gangadhar Vadaparthi</div>
+    <div class="row">
+      <!-- update links if you move files -->
+      <a class="pill" href="../docs/UncertainityAwareGS.pdf" target="_blank" rel="noopener">📄 Write up (PDF)</a>
+      <a class="pill" href="https://github.com/tarungangadhar/uncertainty-aware-3dgs" target="_blank" rel="noopener">💻 Code</a>
+    </div>
+  </header>
+
+  <!-- Demo Video -->
+  <section>
+    <hr>
+    <h3>Demo</h3>
+    <video autoplay loop muted playsinline>
+      <source src="assets/demo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <!-- Abstract -->
+  <section>
+    <hr>
+    <h3>Abstract</h3>
+    <p>
+      We estimate per-splat uncertainty directly on a pretrained 3D Gaussian Splatting (3DGS) scene without retraining.
+      For a short azimuth orbit of camera views, we compute a per-view visibility score for each splat and take the
+      cross-view dispersion (standard deviation) as uncertainty. Stable geometry stays low; depth-unstable, peripheral,
+      or flickery regions score high. We visualize RGB and an uncertainty-colored view and optionally export short orbit GIFs.
+      The pipeline is Colab-friendly and runs on modest hardware.
+    </p>
+  </section>
+
+  <!-- Method (brief) -->
+  <section>
+    <hr>
+    <h3>Method (brief)</h3>
+    <p>
+      For splat \(i\) and view \(v\), we define a visibility proxy
+      \( s_i^{(v)} = \alpha_i \cdot \frac{r_i^2}{z_i^2} \), where \(\alpha_i\) is opacity,
+      \(r_i\) the projected screen-space radius, and \(z_i\) the depth. The uncertainty is
+      \( u_i = \mathrm{std}_v\big(s_i^{(v)}\big) \). We percentile-normalize \(u_i\) to \([0,1]\)
+      and colorize for visualization.
+    </p>
+  </section>
+
+  <!-- Interactive Comparison -->
+  <section>
+    <hr>
+    <h3>RGB ↔ Uncertainty (drag the arrow) </h3>
+    <figure class="compare" aria-label="RGB vs Uncertainty comparison">
+      <!-- left: RGB; right: uncertainty heatmap -->
+      <img src="assets/normal.png" alt="RGB">
+      <img class="after" src="assets/uncertainty.png" alt="Uncertainty">
+      <div class="line" aria-hidden="true"></div>
+      <div class="knob" aria-hidden="true">
+        <div class="chev"><span class="l"></span><span class="r"></span></div>
+      </div>
+      <input type="range" min="0" max="100" value="50" aria-label="drag to compare">
+      <div class="label left">RGB</div>
+      <div class="label right">Uncertainty</div>
+    </figure>
+  </section>
+
+  
+
+</main>
+
+<script>
+  // minimal, unobtrusive slider
+  (function(){
+    const cmp = document.querySelector('.compare');
+    if(!cmp) return;
+    const after = cmp.querySelector('.after');
+    const line  = cmp.querySelector('.line');
+    const knob  = cmp.querySelector('.knob');
+    const range = cmp.querySelector('input[type=range]');
+
+    const set = v => {
+      const pct = Math.max(0, Math.min(100, v));
+      const val = pct + '%';
+      after.style.setProperty('--split', val);
+      cmp.style.setProperty('--split', val);
+      line.style.setProperty('--x', val);
+      knob.style.left = val;
+      range.value = pct;
+    };
+    const pctFromX = x => {
+      const r = cmp.getBoundingClientRect();
+      return ((x - r.left) / r.width) * 100;
+    };
+
+    set(range.value);
+    range.addEventListener('input', e => set(e.target.value));
+    cmp.addEventListener('pointerdown', e => { cmp.setPointerCapture(e.pointerId); set(pctFromX(e.clientX)); });
+    cmp.addEventListener('pointermove', e => { if (e.buttons) set(pctFromX(e.clientX)); });
+  })();
+</script>
+</body>
+</html>
