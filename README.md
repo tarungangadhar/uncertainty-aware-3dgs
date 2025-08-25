@@ -1,4 +1,4 @@
-# Uncertainty-Aware 3D Gaussian Splatting (3DGS)
+# Uncertainty Aware 3D Gaussian Splatting 
 
 **Per-splat uncertainty from multi-view visibility dispersion** — a light, reproducible diagnostic on top of a pretrained 3DGS `.ply` scene. No retraining required; runs on free Colab/T4.
 
